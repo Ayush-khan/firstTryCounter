@@ -340,12 +340,156 @@
 
 // export default PieChartComponent;
 
-// Four attempts
+// // Four attempts
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { PieChart, Pie, ResponsiveContainer } from "recharts";
+
+// const API_URL = "http://127.0.0.1:8000";
+
+// const dummyData = {
+//   class1: [
+//     { name: "Group A", value: 400 },
+//     { name: "Group B", value: 300 },
+//     { name: "Group C", value: 300 },
+//     { name: "Group D", value: 200 },
+//   ],
+//   class2: [
+//     { name: "Group A", value: 200 },
+//     { name: "Group B", value: 100 },
+//     { name: "Group C", value: 300 },
+//     { name: "Group D", value: 400 },
+//   ],
+//   // More classes can be added here
+// };
+
+// const ChartsStudent = () => {
+//   const [classes, setClasses] = useState([]);
+//   const [selectedClass, setSelectedClass] = useState("");
+//   const [classData, setClassData] = useState([]);
+//   const [error, setError] = useState("");
+
+//   useEffect(() => {
+//     const fetchClasses = async () => {
+//       try {
+//         const token = localStorage.getItem("authToken");
+//         const academicYr = localStorage.getItem("academicYear");
+
+//         if (!token || !academicYr) {
+//           throw new Error("No authentication token or academic year found");
+//         }
+
+//         const response = await axios.get(`${API_URL}/api/classes`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             "X-Academic-Year": academicYr,
+//           },
+//         });
+
+//         setClasses(response.data);
+//       } catch (error) {
+//         setError(error.message);
+//         console.error("Error fetching classes:", error);
+//       }
+//     };
+
+//     fetchClasses();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         if (!selectedClass) return;
+
+//         const token = localStorage.getItem("authToken");
+//         const academicYr = localStorage.getItem("academicYear");
+
+//         if (!token || !academicYr) {
+//           throw new Error("No authentication token or academic year found");
+//         }
+
+//         const response = await axios.get(`${API_URL}/api/data`, {
+//           params: { class: selectedClass },
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             "X-Academic-Year": academicYr,
+//           },
+//         });
+
+//         setClassData(response.data);
+//       } catch (error) {
+//         console.error("Error fetching class data:", error);
+//         // Fallback to dummy data in case of an error
+//         setClassData(dummyData[selectedClass] || []);
+//       }
+//     };
+
+//     fetchData();
+//   }, [selectedClass]);
+
+//   const renderPieChart = () => (
+//     <ResponsiveContainer width="100%" height={400}>
+//       <PieChart>
+//         <Pie
+//           dataKey="value"
+//           startAngle={180}
+//           endAngle={0}
+//           data={classData}
+//           cx="50%"
+//           cy="50%"
+//           outerRadius={80}
+//           fill="#8884d8"
+//           label
+//         />
+//       </PieChart>
+//     </ResponsiveContainer>
+//   );
+
+//   return (
+//     <div>
+//       <label>Select Class:</label>
+//       <select
+//         value={selectedClass}
+//         onChange={(e) => setSelectedClass(e.target.value)}
+//       >
+//         <option value="">Select Class</option>
+//         {classes.map((cls) => (
+//           <option key={cls} value={cls}>
+//             {cls}
+//           </option>
+//         ))}
+//       </select>
+//       {error && <p style={{ color: "red" }}>{error}</p>}
+//       {selectedClass ? (
+//         <div
+//           style={{
+//             display: "flex",
+//             flexWrap: "wrap",
+//             justifyContent: "space-between",
+//           }}
+//         >
+//           {Array(4)
+//             .fill()
+//             .map((_, index) => (
+//               <div key={index} style={{ width: "48%", marginBottom: "20px" }}>
+//                 {renderPieChart()}
+//               </div>
+//             ))}
+//         </div>
+//       ) : (
+//         <p>Please select a class to view the charts.</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default ChartsStudent;
+
+// fifth type
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { PieChart, Pie, ResponsiveContainer } from "recharts";
 
-const API_URL = "http://127.0.0.1:8000";
+const dummyClasses = ["class1", "class2"]; // Dummy classes data
 
 const dummyData = {
   class1: [
@@ -364,12 +508,15 @@ const dummyData = {
 };
 
 const ChartsStudent = () => {
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState(dummyClasses);
   const [selectedClass, setSelectedClass] = useState("");
   const [classData, setClassData] = useState([]);
   const [error, setError] = useState("");
 
+  // useEffect to fetch classes from API (currently using dummy data)
   useEffect(() => {
+    // Uncomment and modify the following block when API is available
+    /*
     const fetchClasses = async () => {
       try {
         const token = localStorage.getItem("authToken");
@@ -394,6 +541,7 @@ const ChartsStudent = () => {
     };
 
     fetchClasses();
+    */
   }, []);
 
   useEffect(() => {
@@ -401,6 +549,9 @@ const ChartsStudent = () => {
       try {
         if (!selectedClass) return;
 
+        // Simulate API call with dummy data
+        // Uncomment and modify the following block when API is available
+        /*
         const token = localStorage.getItem("authToken");
         const academicYr = localStorage.getItem("academicYear");
 
@@ -417,6 +568,8 @@ const ChartsStudent = () => {
         });
 
         setClassData(response.data);
+        */
+        setClassData(dummyData[selectedClass] || []);
       } catch (error) {
         console.error("Error fetching class data:", error);
         // Fallback to dummy data in case of an error
@@ -464,14 +617,26 @@ const ChartsStudent = () => {
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
+            flexDirection: "row",
+            // flexWrap: "wrap",
+            width: "66vw",
+            gap: "5px",
+            border: "1px solid red",
+            // justifyContent: "space-between",
           }}
         >
           {Array(4)
             .fill()
             .map((_, index) => (
-              <div key={index} style={{ width: "48%", marginBottom: "20px" }}>
+              <div
+                key={index}
+                style={{
+                  boxSizing: "border-box",
+                  width: "20vw",
+                  border: "2px solid black",
+                  marginBottom: "20px",
+                }}
+              >
                 {renderPieChart()}
               </div>
             ))}

@@ -4,7 +4,17 @@ import ChartsStudent from "./ChartsStudent.jsx";
 function App() {
   return (
     <>
-      <ChartsStudent />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          border: "4px solid green",
+          width: "66%",
+        }}
+      >
+        <ChartsStudent />
+      </div>
+
       {/* <CounterApp /> */}
     </>
   );
