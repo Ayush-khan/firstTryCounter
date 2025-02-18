@@ -8,8 +8,10 @@ function App() {
         style={{
           display: "flex",
           flexDirection: "row",
-          border: "4px solid green",
+          justifyContent: "center",
+          alignContent: "center",
           width: "66%",
+          margin: "auto",
         }}
       >
         <ChartsStudent />
