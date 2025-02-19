@@ -513,7 +513,8 @@ const ChartsStudent = () => {
   const [classData, setClassData] = useState([]);
   const [error, setError] = useState("");
 
-  // useEffect to fetch classes from API (currentlyfds using dgfdg
+  // useEffect to fetch classes from API (currently using dummy data)
+  useEffect(() => {
     // Uncomment and modify the following block when API is available
     /*
     const fetchClasses = async () => {
