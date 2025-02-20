@@ -504,7 +504,7 @@ const dummyData = {
     { name: "Group C", value: 300 },
     { name: "Group D", value: 400 },
   ],
-  // More gfdgclasse vdsfs can g dfg fdgg besdfsdf added herefds
+  // More gfdgclasse vdsfs can g dfgbesdfsdf added herefds
 };
 
 const ChartsStudent = () => {
